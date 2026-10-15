@@ -95,3 +95,18 @@ def test_create_message_strips_surrounding_whitespace(client: TestClient) -> Non
 
     assert created["author"] == "Ада"
     assert created["text"] == "Привет"
+
+
+def test_get_message_returns_message_by_id(client: TestClient) -> None:
+    created = post_message(client, "Ада", "Привет")
+
+    response = client.get(f"/messages/{created['id']}")
+
+    assert response.status_code == 200
+    assert response.json() == created
+
+
+def test_get_message_returns_404_when_missing(client: TestClient) -> None:
+    response = client.get("/messages/999")
+
+    assert response.status_code == 404

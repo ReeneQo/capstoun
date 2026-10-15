@@ -14,6 +14,15 @@ def list_messages(conn: Connection, limit: int) -> list[MessageOut]:
         return cur.fetchall()
 
 
+def get_message(conn: Connection, message_id: int) -> MessageOut | None:
+    with conn.cursor(row_factory=class_row(MessageOut)) as cur:
+        cur.execute(
+            "SELECT id, author, text, created_at FROM messages WHERE id = %s",
+            (message_id,),
+        )
+        return cur.fetchone()
+
+
 def add_message(conn: Connection, message: MessageIn) -> MessageOut:
     with conn.cursor(row_factory=class_row(MessageOut)) as cur:
         cur.execute(

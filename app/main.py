@@ -2,7 +2,7 @@ from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from typing import Annotated
 
-from fastapi import FastAPI, Query, status
+from fastapi import FastAPI, HTTPException, Query, status
 
 from app import repository
 from app.config import get_settings
@@ -38,6 +38,14 @@ def list_messages(
     limit: Annotated[int, Query(ge=1, le=100)] = 50,
 ) -> list[MessageOut]:
     return repository.list_messages(conn, limit)
+
+
+@app.get("/messages/{message_id}")
+def get_message(message_id: int, conn: DbConnection) -> MessageOut:
+    message = repository.get_message(conn, message_id)
+    if message is None:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Message not found")
+    return message
 
 
 @app.post("/messages", status_code=status.HTTP_201_CREATED)
