@@ -1,0 +1,16 @@
+.env
+.env.*
+.git/
+.github/
+.gitignore
+.venv/
+.ruff_cache/
+.pytest_cache/
+__pycache__/
+*.py[cod]
+tests/
+*.md
+.dockerignore
+Dockerfile
+compose.yaml
+.python-version
