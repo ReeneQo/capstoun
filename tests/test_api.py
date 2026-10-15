@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -78,3 +80,9 @@ def test_list_rejects_out_of_range_limit(client: TestClient, limit: int) -> None
     response = client.get("/messages", params={"limit": limit})
 
     assert response.status_code == 422
+
+
+def test_create_message_sets_created_at(client: TestClient) -> None:
+    created = post_message(client, "Ада", "Привет")
+
+    assert datetime.fromisoformat(created["created_at"]).tzinfo is not None
