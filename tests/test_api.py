@@ -65,6 +65,8 @@ def test_list_respects_limit(client: TestClient) -> None:
         {"author": "Ада", "text": ""},
         {"author": "Ада"},
         {"author": "x" * 101, "text": "текст"},
+        {"author": "   ", "text": "текст"},
+        {"author": "Ада", "text": "\n\t "},
     ],
 )
 def test_create_message_rejects_invalid_payload(
@@ -86,3 +88,10 @@ def test_create_message_sets_created_at(client: TestClient) -> None:
     created = post_message(client, "Ада", "Привет")
 
     assert datetime.fromisoformat(created["created_at"]).tzinfo is not None
+
+
+def test_create_message_strips_surrounding_whitespace(client: TestClient) -> None:
+    created = post_message(client, "  Ада ", "\n Привет \t")
+
+    assert created["author"] == "Ада"
+    assert created["text"] == "Привет"
