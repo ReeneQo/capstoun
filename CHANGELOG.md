@@ -13,7 +13,7 @@
 - Пул соединений к PostgreSQL и идемпотентные миграции при старте.
 - Docker-образ (не от root) и `compose.yaml` с healthcheck для `app` и `db`.
 - CI: Ruff и pytest на каждый push и pull request.
-- CD: публикация образа в ghcr.io из `main` (`:latest`) и по тегам `vX.Y.Z`.
+- CD: публикация образа в ghcr.io из `main` (`:latest`) и по тегам `vX.Y.Z` для amd64 и arm64.
 - README, RUNBOOK, CHANGELOG.
 
 [1.0.0]: https://github.com/ReeneQo/capstoun/releases/tag/v1.0.0
