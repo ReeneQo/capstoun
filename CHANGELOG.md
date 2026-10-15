@@ -3,6 +3,12 @@
 Формат — [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/),
 версии — [SemVer](https://semver.org/lang/ru/).
 
+## [1.2.0] — 2026-10-15
+
+### Added
+
+- `GET /messages/{id}` — одно сообщение по id, `404`, если его нет. Схема БД не менялась.
+
 ## [1.1.1] — 2026-10-15
 
 ### Fixed
@@ -35,6 +41,7 @@
 - CD: публикация образа в ghcr.io из `main` (`:latest`) и по тегам `vX.Y.Z` для amd64 и arm64.
 - README, RUNBOOK, CHANGELOG.
 
+[1.2.0]: https://github.com/ReeneQo/capstoun/releases/tag/v1.2.0
 [1.1.1]: https://github.com/ReeneQo/capstoun/releases/tag/v1.1.1
 [1.1.0]: https://github.com/ReeneQo/capstoun/releases/tag/v1.1.0
 [1.0.0]: https://github.com/ReeneQo/capstoun/releases/tag/v1.0.0
